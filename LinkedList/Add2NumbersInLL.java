@@ -44,24 +44,6 @@ class Solution {
             if(head2 != null) head2 = head2.next;
         }
 
-//        while(head1 != null) {
-//            int sum = carry + head1.val;
-//            carry = sum/10;
-//            Node newNode = new Node(sum % 10);
-//            temp.next = newNode;
-//            temp = newNode;
-//            head1 = head1.next;
-//        }
-//
-//        while(head2 != null) {
-//            int sum = carry + head2.val;
-//            carry = sum/10;
-//            Node newNode = new Node(sum % 10);
-//            temp.next = newNode;
-//            temp = newNode;
-//            head2 = head2.next;
-//        }
-
         if(carry != 0) {
             temp.next = new Node(carry);
         }

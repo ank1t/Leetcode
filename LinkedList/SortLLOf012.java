@@ -29,13 +29,50 @@ class Solution {
             temp = temp.next;
         }
     }
+
+    Node sortLLOf012BruteForce(Node head) {
+        int cnt0 = 0;
+        int cnt1 = 0;
+        int cnt2 = 0;
+        Node temp = head;
+        while(temp != null) {
+            if(temp.val == 0) cnt0++;
+            else if(temp.val == 1) cnt1++;
+            else cnt2++;
+            temp = temp.next;
+        }
+
+        temp = head;
+        while(temp != null) {
+            if(cnt0 > 0) {
+                temp.val = 0;
+                cnt0--;
+            }
+            else if(cnt1 > 0) {
+                temp.val = 1;
+                cnt1--;
+            }
+            else {
+                temp.val = 2;
+                cnt2--;
+            }
+            temp = temp.next;
+        }
+
+        return head;
+    }
+
+    Node sortLLOf012Optimized(Node head) {
+        return head;
+    }
 }
 
 class Scratch {
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] arr = {1,2,3,4,5,6,7,8};
+        int[] arr = {1,0,1,2,0,2,1};
         Node head = sol.convertArrayToLinkedList(arr);
+        sol.sortLLOf012BruteForce(head);
         sol.printLLFromHeadToTail(head);
     }
 }
