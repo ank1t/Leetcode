@@ -82,7 +82,7 @@ class Solution {
             }
             temp = temp.next;
         }
-        tail0.next = head1.next;
+        tail0.next = head1.next != null ? head1.next : head2.next;
         tail1.next = head2.next;
         tail2.next = null;
         return head0.next;
