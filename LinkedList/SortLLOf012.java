@@ -62,39 +62,30 @@ class Solution {
     }
 
     Node sortLLOf012Optimized(Node head) {
-        Node tail0 = null, tail1 = null, tail2 = null;
-        Node head0 = null, head1 = null, head2 = null;
+
+        Node head0 = new Node(-1), head1 = new Node(-1), head2 = new Node(-1);
+        Node tail0 = head0;
+        Node tail1 = head1;
+        Node tail2 = head2;
 
         Node temp = head;
         while(temp != null) {
             if(temp.val == 0) {
-                if(head0 == null) {
-                    head0 = temp;
-                } else {
-                    tail0.next = temp;
-                }
+                tail0.next = temp;
                 tail0 = temp;
             } else if(temp.val == 1) {
-                if(head1 == null) {
-                    head1 = temp;
-                } else {
-                    tail1.next = temp;
-                }
+                tail1.next = temp;
                 tail1 = temp;
             } else {
-                if(head2 == null) {
-                    head2 = temp;
-                } else {
-                    tail2.next = temp;
-                }
+                tail2.next = temp;
                 tail2 = temp;
             }
             temp = temp.next;
         }
-        tail0.next = head1;
-        tail1.next = head2;
+        tail0.next = head1.next;
+        tail1.next = head2.next;
         tail2.next = null;
-        return head0;
+        return head0.next;
     }
 }
 
