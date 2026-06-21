@@ -53,15 +53,29 @@ class Solution {
     }
 
     Node deleteNThNodeFromEndOfLLOptimized(Node head, int n) {
-    return null;
+        int count = 0;
+        Node dummyHead = new Node(-1);
+        dummyHead.next = head;
+        Node runner = head;
+        Node prevBeforeTarget = dummyHead;
+
+        while(runner != null) {
+            if(count < n) count++;
+            else {
+                prevBeforeTarget = prevBeforeTarget.next;
+            }
+            runner = runner.next;
+        }
+        prevBeforeTarget.next = prevBeforeTarget.next.next;
+        return dummyHead.next;
     }
 }
 class Scratch {
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] arr = {1,2,3,4,5,6,7,8,9,0};
+        int[] arr = {1,2,3,4,5};
         Node head = sol.convertArrayToLL(arr);
-        Node newHead = sol.deleteNThNodeFromEndOfLLBruteForce(head,5);
+        Node newHead = sol.deleteNThNodeFromEndOfLLOptimized(head,2);
         sol.printLLFromHead(newHead);
     }
 }
