@@ -75,7 +75,7 @@ class Scratch {
         Solution sol = new Solution();
         int[] arr = {1,2,3,4,5};
         Node head = sol.convertArrayToLL(arr);
-        Node newHead = sol.deleteNThNodeFromEndOfLLOptimized(head,2);
+        Node newHead = sol.deleteNThNodeFromEndOfLLOptimized(head,5);
         sol.printLLFromHead(newHead);
     }
 }
