@@ -44,13 +44,23 @@ class Solution {
         }
         return prev;
     }
+
+    Node reverseLLUsingRecursion(Node head) {
+        if(head == null || head.next == null) return head;
+
+        Node newHead = reverseLLUsingRecursion(head.next);
+        Node front = head.next;
+        front.next = head;
+        head.next = null;
+        return newHead;
+    }
 }
 class Scratch {
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] arr = {1,2,3,4,5};
+        int[] arr = {1,2,3};
         Node head = sol.convertArrayToLL(arr);
-        Node newNode = sol.reverseLL(head);
+        Node newNode = sol.reverseLLUsingRecursion(head);
         sol.printLLFromHeadToTail(newNode);
     }
 }
