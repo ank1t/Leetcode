@@ -31,11 +31,26 @@ class Solution {
     }
 
     Node reverseLL(Node head) {
+        if(head == null) return null;
 
+        Node runner = head;
+        Node prev = null;
+
+        while(runner != null) {
+            Node next = runner.next;
+            runner.next = prev;
+            prev = runner;
+            runner = next;
+        }
+        return prev;
     }
 }
 class Scratch {
     public static void main(String[] args) {
-        
+        Solution sol = new Solution();
+        int[] arr = {1,2,3,4,5};
+        Node head = sol.convertArrayToLL(arr);
+        Node newNode = sol.reverseLL(head);
+        sol.printLLFromHeadToTail(newNode);
     }
 }
