@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 class Node {
     int val;
     Node next;
@@ -27,9 +29,29 @@ class Solution {
             temp = temp.next;
         }
     }
+
+    boolean checkIfLLIsPalindrome(Node head) {
+        if(head == null || head.next == null) return true;
+        Stack<Integer> stack = new Stack<>();
+        Node temp = head;
+        while(temp != null) {
+            stack.push(temp.val);
+            temp = temp.next;
+        }
+
+        temp = head;
+        while(temp != null) {
+            if(temp.val != stack.pop()) return false;
+            temp = temp.next;
+        }
+        return true;
+    }
 }
 class Scratch {
     public static void main(String[] args) {
-        
+        Solution sol = new Solution();
+        int[] arr = {1,2,3,2,0};
+        Node head = sol.convertArrayToLL(arr);
+        System.out.print(sol.checkIfLLIsPalindrome(head));
     }
 }
