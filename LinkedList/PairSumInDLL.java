@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 class Node {
     int val;
@@ -44,14 +45,33 @@ class Solution {
             temp = temp.prev;
         }
     }
+
+    ArrayList<ArrayList<Integer>> findPairSum(Node head, int sum) {
+        ArrayList<ArrayList<Integer>> result = new ArrayList<>();
+        Node tail = head;
+        while(tail.next != null) tail = tail.next;
+
+        while(head.val < tail.val) {
+            if(head.val + tail.val > sum) tail = tail.prev;
+            else if(head.val + tail.val < sum) head = head.next;
+            else {
+                ArrayList<Integer> ans = new ArrayList<>();
+                ans.add(head.val);
+                ans.add(tail.val);
+                result.add(ans);
+                head = head.next;
+                tail = tail.prev;
+            }
+        }
+        return result;
+    }
 }
 
 class Scratch {
     public static void main(String[] args) {
         Solution sol = new Solution();
-        int[] arr = {1,2,3,4,5,6,7,8,9,0};
+        int[] arr = {1,2,3,4,5,6,7,8,9};
         Node head = sol.convertArrayToDLL(arr);
-//        sol.printDLLFromHeadToTail(head);
-        sol.printDLLFromTailToHead(head);
+        System.out.print(sol.findPairSum(head, 100));
     }
 }
