@@ -15,7 +15,7 @@ class Solution {
         Node temp = head;
 
         for(int k = 1;k < arr.length;k++) {
-            Node newNode = new Node(arr[1]);
+            Node newNode = new Node(arr[k]);
             temp.next = newNode;
             temp = newNode;
         }
@@ -31,12 +31,30 @@ class Solution {
     }
 
     Node removeDuplicatesFromLL(Node head) {
-        
+        if(head == null || head.next == null) return head;
+        int prevVal = head.val;
+        Node prevUniqueNode = head;
+        Node temp = head;
+
+        while(temp != null) {
+            if(temp.val != prevVal) {
+                prevVal = temp.val;
+                prevUniqueNode.next = temp;
+                prevUniqueNode = temp;
+            }
+            temp = temp.next;
+        }
+        prevUniqueNode.next = null;
+        return head;
     }
 }
 
 class Scratch {
     public static void main(String[] args) {
-        
+        Solution sol = new Solution();
+        int[] arr = {1,1,2,2,3,3,3,3,3,3,4,4,4,4};
+        Node head = sol.convertArrayToLL(arr);
+        sol.removeDuplicatesFromLL(head);
+        sol.printLLFromHeadToTail(head);
     }
 }
