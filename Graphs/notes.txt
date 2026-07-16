@@ -1,0 +1,7 @@
+Nodes are also called as vertex or vertices
+
+Edges connect 2 nodes
+
+Undirected graphs
+
+Directed graphs
