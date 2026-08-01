@@ -1,5 +1,8 @@
 import java.util. *;
 
+/*
+    Time Complexity O(n) + O(V + 2E)
+ */
 class Solution {
     public int findCircleNum(int[][] isConnected) {
         int n = isConnected[0].length;
@@ -21,7 +24,7 @@ class Solution {
         visited[node] = true;
 
         for (int i = 0;i < isConnected.length;i++) {
-            if (!visited[i] && isConnected[node][i] == 1) dfs(adj, adjVertex, visited);
+            if (!visited[i] && isConnected[node][i] == 1) dfs(isConnected, i, visited);
         }
     }
 }
