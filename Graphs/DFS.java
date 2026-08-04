@@ -8,7 +8,6 @@ class Solution {
     ArrayList<Integer> dfs(ArrayList<ArrayList<Integer>> adj) {
         ArrayList<Integer> dfs = new ArrayList<>();
         boolean[] visited = new boolean[adj.size() + 1];
-        visited[0] = true;
 
         traverseChildren(adj, visited, dfs, 3);
 
@@ -23,7 +22,7 @@ class Solution {
         dfs.add(node);
 
         for(int adjVertex: adj.get(node)) {
-            if(!visited[node]) {
+            if(!visited[adjVertex]) {
                 traverseChildren(adj, visited, dfs, adjVertex);
             }
         }
