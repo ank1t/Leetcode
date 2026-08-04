@@ -23,7 +23,7 @@ class Solution {
                      int row, int col, boolean[] visited) {
         visited[i * col + j] = true;
 
-        if(j - 1 < col && j - 1 >= 0 && !visited[i * col + j - 1] && grid[i][j - 1] == '1' ) {
+        if(j - 1 >= 0 && !visited[i * col + j - 1] && grid[i][j - 1] == '1' ) {
             dfs(grid, i, j - 1, row, col, visited);
         }
 
