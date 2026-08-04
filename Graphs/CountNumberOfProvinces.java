@@ -5,7 +5,7 @@ import java.util. *;
  */
 class Solution {
     public int findCircleNum(int[][] isConnected) {
-        int n = isConnected[0].length;
+        int n = isConnected.length;
         boolean[] visited = new boolean[n];
         int count = 0;
 
@@ -24,7 +24,7 @@ class Solution {
         visited[node] = true;
 
         for (int i = 0;i < isConnected.length;i++) {
-            if (!visited[i] && isConnected[node][i] == 1) dfs(isConnected, i, visited);
+            if (node != i && !visited[i] && isConnected[node][i] == 1) dfs(isConnected, i, visited);
         }
     }
 }
@@ -37,6 +37,6 @@ class Scratch {
                 {1, 1, 0},
                 {0, 0, 1}
         };
-        sol.findCircleNum(isConnected);
+        System.out.println(sol.findCircleNum(isConnected));
     }
 }
