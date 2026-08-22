@@ -9,8 +9,9 @@ class Solution {
         boolean[] visited = new boolean[V + 1];
         Queue<Integer> q = new LinkedList<>();
 
-        visited[1] = true;
+        //Mark as visited whenever a node is added to the Q
         q.add(1);
+        visited[1] = true;
 
         while(!q.isEmpty()) {
             int node = q.poll();
