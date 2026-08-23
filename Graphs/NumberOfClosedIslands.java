@@ -8,60 +8,43 @@ class Solution {
         n = grid[0].length;
         Queue<RowColPair> q = new LinkedList<>();
         boolean[] visited = new boolean[m * n];
-        int[][] directions = {{1,0},{-1,0},{0,1},{0,-1}};
+        int[][] directions = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
 
         int numOfClosedIslands = 0;
 
-        for(int i = 0;i < m;i++) {
-            for(int j = 0;j < n;j++) {
-                if((i == 0 || i == m - 1 || j == 0 || j == n - 1) &&
-                        grid[i][j] == 0 && !visited[i * n + j]) {
+        for (int i = 0; i < m; i++) {
+            for (int j = 0; j < n; j++) {
+
+                if (grid[i][j] == 0 && !visited[i * n + j]) {
+                    boolean canCountInResult = true;
                     q.add(new RowColPair(i, j));
                     visited[i * n + j] = true;
-                }
+                    canCountInResult = !isBorderCell(i, j);
 
-                while(!q.isEmpty()) {
-                    RowColPair pair = q.poll();
+                    while (!q.isEmpty()) {
+                        RowColPair pair = q.poll();
 
-                    for(int[] direction: directions) {
-                        int newRow = pair.row + direction[0];
-                        int newCol = pair.col + direction[1];
+                        for (int[] direction : directions) {
+                            int newRow = pair.row + direction[0];
+                            int newCol = pair.col + direction[1];
 
-                        if(isValid(newRow, newCol, grid) && !visited[newRow * n + newCol]) {
-                            q.add(new RowColPair(newRow, newCol));
-                            visited[newRow * n + newCol] = true;
+                            if (isValid(newRow, newCol, grid) && !visited[newRow * n + newCol]) {
+                                canCountInResult = canCountInResult && !isBorderCell(newRow, newCol);
+                                q.add(new RowColPair(newRow, newCol));
+                                visited[newRow * n + newCol] = true;
+                            }
                         }
                     }
+                    if (canCountInResult)
+                        numOfClosedIslands++;
                 }
             }
         }
-
-        for(int i = 0;i < m;i++) {
-            for(int j = 0;j < n;j++) {
-                if((i != 0 && i != m - 1 && j != 0 && j != n - 1) &&
-                        grid[i][j] == 0 && !visited[i * n + j]) {
-                    q.add(new RowColPair(i, j));
-                    visited[i * n + j] = true;
-                    numOfClosedIslands++;
-                }
-
-                while(!q.isEmpty()) {
-                    RowColPair pair = q.poll();
-
-                    for(int[] direction: directions) {
-                        int newRow = pair.row + direction[0];
-                        int newCol = pair.col + direction[1];
-
-                        if(isValid(newRow, newCol, grid) && !visited[newRow * n + newCol]) {
-                            q.add(new RowColPair(newRow, newCol));
-                            visited[newRow * n + newCol] = true;
-                        }
-                    }
-                }
-            }
-        }
-
         return numOfClosedIslands;
+    }
+
+    boolean isBorderCell(int row, int col) {
+        return row == 0 || row == m - 1 || col == 0 || col == n - 1;
     }
 
     boolean isValid(int row, int col, int[][] grid) {
