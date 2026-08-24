@@ -8,8 +8,7 @@ class Solution {
 
         for(int i = 0;i < V;i++) {
             if(!visited[i]) {
-                visited[i] = true;
-                pathVisited[i] = true;
+
 
                 if(dfs(adj, visited, pathVisited, i)) return true;
             }
@@ -30,11 +29,11 @@ class Solution {
     }
 
     boolean dfs(ArrayList<ArrayList<Integer>> adj, boolean[] visited, boolean[] pathVisited, int node) {
+        visited[i] = true;
+        pathVisited[i] = true;
 
         for(int vertex: adj.get(node)) {
             if(!visited[vertex]) {
-                visited[vertex] = true;
-                pathVisited[vertex] = true;
                 if(dfs(adj, visited, pathVisited, vertex)) return true;
             } else {
                 if(pathVisited[vertex]) return true;
