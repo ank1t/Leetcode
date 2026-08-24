@@ -36,7 +36,6 @@ class Solution {
                 visited[vertex] = true;
                 pathVisited[vertex] = true;
                 if(dfs(adj, visited, pathVisited, vertex)) return true;
-                pathVisited[vertex] = false;
             } else {
                 if(pathVisited[vertex]) return true;
             }
