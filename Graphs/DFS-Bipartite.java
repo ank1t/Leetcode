@@ -17,12 +17,12 @@ class Solution {
     }
 
     boolean dfs(int[][] graph, int[] color, int node, int colorID) {
-
         for(int adj: graph[node]) {
             if(color[adj] == color[node]) return false;
-            if(color[adj] != 0) continue;
-            color[adj] = colorID == 1 ? 2 : 1;
-            if(!dfs(graph, color, adj, colorID == 1 ? 2 : 1)) return false;
+            if(color[adj] == 0) {
+                color[adj] = colorID == 1 ? 2 : 1;
+                if (!dfs(graph, color, adj, colorID == 1 ? 2 : 1)) return false;
+            }
         }
         return true;
     }
