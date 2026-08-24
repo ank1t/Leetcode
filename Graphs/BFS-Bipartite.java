@@ -73,6 +73,16 @@ class Scratch {
         //true
         int[][] graph5 = {{1},{0,3}, {3},{1,2}};
 
-        System.out.println(sol.isBipartite(graph1));
+        Map<int[][], Boolean> dict = new HashMap<>();
+        dict.put(graph1, false);
+        dict.put(graph2, true);
+        dict.put(graph3, true);
+        dict.put(graph4, false);
+        dict.put(graph5, true);
+
+        for(Map.Entry<int[][], Boolean> map: dict.entrySet()) {
+            System.out.println(sol.isBipartite(map.getKey()) == map.getValue());
+        }
+
     }
 }
