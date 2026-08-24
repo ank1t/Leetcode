@@ -1,8 +1,30 @@
 import java.util.*;
 
 class Solution {
-    public boolean isBipartite(int[][] graph) {
+    int m;
 
+    public boolean isBipartite(int[][] graph) {
+        m = graph.length;
+        int[] color = new int[m];
+
+        for(int j = 0;j < m;j++) {
+            if(color[j] == 0) {
+            color[j] = 1;
+            if(!dfs(graph, color, j, 1)) return false;
+            }
+        }
+        return true;
+    }
+
+    boolean dfs(int[][] graph, int[] color, int node, int colorID) {
+
+        for(int adj: graph[node]) {
+            if(color[adj] == color[node]) return false;
+            if(color[adj] != 0) continue;
+            color[adj] = colorID == 1 ? 2 : 1;
+            if(!dfs(graph, color, adj, colorID == 1 ? 2 : 1)) return false;
+        }
+        return true;
     }
 }
 
