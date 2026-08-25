@@ -23,3 +23,5 @@ EDGE WEIGHTS:
 Topological sorting
 Only applies to DAG(Directed acyclic graph). Its a linear ordering of vertices such that if there is and edge between
 U and V, U appears before V in ordering.
+
+There can be multiple valid ordering.
