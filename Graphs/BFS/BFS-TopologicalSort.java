@@ -15,7 +15,7 @@ class Solution {
         }
         for(int[] edge: edges) {
             adj.get(edge[0]).add(edge[1]);
-            indegree[edge[1]] = indegree[edge[1]] + 1;
+            indegree[edge[1]]++;
         }
         return adj;
     }
@@ -35,10 +35,8 @@ class Solution {
             int vertex = q.poll();
 
             for(int adjV: adj.get(vertex)) {
-                int currentDegree = indegree[adjV];
-                currentDegree--;
-                indegree[adjV] = currentDegree;
-                if(currentDegree == 0) {
+                indegree[adjV]--;
+                if(indegree[adjV] == 0) {
                     q.add(adjV);
                     ans.add(adjV);
                 }
