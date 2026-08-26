@@ -8,12 +8,14 @@ import java.util.*;
 class Solution {
     public String alienOrder(String[] words) {
         Map<Character, ArrayList<Character>> adj = new HashMap<>();
-        Map<Character, Integer> indegree = new HashMap<>();
+        Map<Character, Boolean> visited = new HashMap<>();
+        Map<Character, Boolean> pathVisited = new HashMap<>();
+        Stack<Character> stack = new Stack<>();
 
         for(String word: words) {
             for(char c: word.toCharArray()) {
-                indegree.put(c, 0);
-                adj.put(c, new ArrayList<>());
+                visited.putIfAbsent(c, false);
+                adj.putIfAbsent(c, new ArrayList<>());
             }
         }
 
@@ -21,44 +23,58 @@ class Solution {
             String w1 = words[i];
             String w2 = words[i + 1];
             if(w1.length() > w2.length() && w1.startsWith(w2)) return "";
-            int len = Math.min(w1.length(), w2.length());
 
-            for(int ptr = 0;ptr < len;ptr++) {
+            for(int ptr = 0;ptr < Math.min(w1.length(), w2.length());ptr++) {
                 if(w1.charAt(ptr) != w2.charAt(ptr)) {
                     adj.get(w1.charAt(ptr)).add(w2.charAt(ptr));
-                    indegree.put(w2.charAt(ptr), indegree.get(w2.charAt(ptr)) + 1);
                     break;
                 }
             }
         }
 
+        for(Character c : adj.keySet()) {
+            if(!visited.get(c)) {
+                boolean result = dfs(adj, visited, pathVisited, stack, c);
+                if(result) return "";
+            };
+        }
+
+        if(stack.size() < visited.size()) return "";
+
         String ans = "";
-        Queue<Character> q = new LinkedList<>();
-        for(Character c : indegree.keySet()) {
-            if(indegree.get(c) == 0) {
-                q.add(c);
-            }
+        while(!stack.isEmpty()) {
+            ans += (char) stack.pop();
         }
-
-        while(!q.isEmpty()) {
-            Character c = q.poll();
-            ans += c;
-            for(Character adjC: adj.get(c)) {
-                indegree.put(adjC, indegree.get(adjC) - 1);
-                if(indegree.get(adjC) == 0) q.add(adjC);
-            }
-        }
-
-        if(ans.length() < indegree.size()) return "";
 
         return ans;
+    }
+
+    boolean dfs(Map<Character, ArrayList<Character>> adj,
+                Map<Character, Boolean> visited,
+                Map<Character, Boolean> pathVisited,
+                Stack<Character> stack, Character c) {
+
+        visited.put(c, true);
+        pathVisited.put(c, true);
+
+        for(Character adjV: adj.get(c)) {
+            if(!visited.get(adjV)) {
+                if(dfs(adj, visited, pathVisited, stack, adjV)) return true;
+            } else {
+                if(pathVisited.get(adjV)) return true;
+            }
+        }
+
+        pathVisited.put(c, false);
+        stack.push(c);
+        return false;
     }
 }
 
 class Scratch {
     public static void main(String[] args) {
         Solution sol = new Solution();
-        String[] words = {"z", "z"};
+        String[] words = {"a","b", "a"};
         System.out.println(sol.alienOrder(words));
     }
 }

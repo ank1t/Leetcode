@@ -13,7 +13,7 @@ class Solution {
         for(String word: words) {
             for(char c: word.toCharArray()) {
                 indegree.put(c, 0);
-                adj.put(c, new ArrayList<>());
+                adj.putIf(c, new ArrayList<>());
             }
         }
 
