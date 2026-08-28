@@ -26,25 +26,22 @@ class Solution {
         boolean node0Hit = false;
         ans.set(0, 0);
         while(!stack.isEmpty()) {
-            Integer  node = stack.pop();
-            if(!node0Hit) {
-                if(node == 0) {
+            Integer node = stack.pop();
+            if (!node0Hit) {
+                if (node == 0) {
                     node0Hit = true;
-                } else continue;
+                } else {
+                    ans.set(node, -1);
+                    continue;
+                }
             }
 
             for (VertexCostPair pair : adj.get(node)) {
                 int v = pair.neighbor;
                 int wt = pair.cost;
-                if(ans.get(node) + wt < ans.get(v)) {
+                if (ans.get(node) + wt < ans.get(v)) {
                     ans.set(v, ans.get(node) + wt);
                 }
-            }
-        }
-
-        for(int i = 0;i < V;i++) {
-            if(ans.get(i) == Integer.MAX_VALUE) {
-                ans.set(i, -1);
             }
         }
        return ans;
