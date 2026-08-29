@@ -27,6 +27,10 @@ class Solution {
         ans.set(0, 0);
         while(!stack.isEmpty()) {
             Integer node = stack.pop();
+            /*
+                Elements appearing before a given element in the stack cannot be reached by the given element.
+                So we keep popping them off the stack and setting -1 in ans list.
+             */
             if (!node0Hit) {
                 if (node == 0) {
                     node0Hit = true;
