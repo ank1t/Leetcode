@@ -25,3 +25,10 @@ Only applies to DAG(Directed acyclic graph). Its a linear ordering of vertices s
 U and V, U appears before V in ordering.
 
 There can be multiple valid ordering.
+
+In a DFS topo sort, nodes that appear before a given node in a stack cannot be reached from that node.
+So, when using DFS to calculate shortest path, set those vertexes to -1
+
+Updating the distance of the neighboring nodes is more appropriate for weighted graphs.
+For unweighted graphs the first time when we reach the target node, that should be the shortest distance
+

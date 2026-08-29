@@ -16,6 +16,7 @@ class Solution {
 
         for(int[] edge : edges) {
             adj.get(edge[0]).add(edge[1]);
+            //Important line for undirected graphs
             adj.get(edge[1]).add(edge[0]);
         }
 
