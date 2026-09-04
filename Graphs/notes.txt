@@ -32,3 +32,7 @@ So, when using DFS to calculate shortest path, set those vertexes to -1
 Updating the distance of the neighboring nodes is more appropriate for weighted graphs.
 For unweighted graphs the first time when we reach the target node, that should be the shortest distance
 
+BELLMAN FORD helps to detect -ve cycles.
+Relax the edges n - 1 times.
+If on the nth iteration while relaxing the edges, if dist[] reduces it means that we are running
+in a -ve loop.
