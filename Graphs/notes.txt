@@ -36,3 +36,11 @@ BELLMAN FORD helps to detect -ve cycles.
 Relax the edges n - 1 times.
 If on the nth iteration while relaxing the edges, if dist[] reduces it means that we are running
 in a -ve loop.
+
+Floyd Warshall algo
+Helps to find the shortest path from every node to every other node i.e multiple source.
+detect negative cycles as well
+
+Min Spanning Tree:
+A tree in which we have n nodes and n - 1 edges and all nodes are reachable from each other.
+We can use Prims Algo and Kruskals algo(Distjoint set) to find the MST;
