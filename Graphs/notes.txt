@@ -44,3 +44,11 @@ detect negative cycles as well
 Min Spanning Tree:
 A tree in which we have n nodes and n - 1 edges and all nodes are reachable from each other.
 We can use Prims Algo and Kruskals algo(Distjoint set) to find the MST;
+
+Disjoint set:
+Time Complexity: Both find and union operations run in \(O(\alpha(N))\) time, where α is the Inverse Ackermann function.
+This function grows so incredibly slowly that for all practical values of N, it stays under 4, effectively giving you O(1) constant time.
+T.C for findParent = 4 * alpha - α is the Inverse Ackermann function
+T.C for findRank = 4 * alpha
+
+Union by Rank or Size: Attaches the smaller tree under the root of the larger tree to keep trees shallow.
