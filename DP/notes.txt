@@ -1,0 +1,5 @@
+1. Tabulation
+    Bottom Up
+
+2. Memoization
+    Top down
