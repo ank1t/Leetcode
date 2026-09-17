@@ -3,3 +3,16 @@
 
 2. Memoization
     Top down
+
+DP problem hint -
+ - Count total number of ways
+ - Min or Max output
+ - Try all possible ways
+
+
+ Strivers ShortCut for all DP problems
+- Try to represent the problem in terms on index
+- Do all possible stuff on that index according to the problem statement
+- Count => sum all stuffs
+- Min => min(all stuffs)
+- Max => max(all stuffs)
