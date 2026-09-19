@@ -10,7 +10,7 @@ class Solution {
             for(int j = 1;j <= k;j++) {
                 if (i - j >= 0) {
                     min = Math.min(min, dp[i - j] + Math.abs(height[i] - height[i - j]));
-                } else break;
+                }
             }
             dp[i] = min;
         }
