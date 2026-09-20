@@ -1,3 +1,4 @@
+//https://www.naukri.com/code360/problems/ninja’s-training_3621003
 class Solution {
     //Top down
     public int ninjaTraining(int n, int[][] points) {
@@ -92,11 +93,17 @@ class Solution {
         dp[0][3] = Math.max(Math.max(points[0][0], points[0][1]), points[0][2]);
 
         for(int day = 1;day < n;day++) {
-            for(int task = 0;task < 4;task++) {
-
+            for(int last = 0; last < 4; last++) {
+                int max = 0;
+                for(int task = 0;task < 3;task++) {
+                    if(task != last) {
+                        max = Math.max(max, points[day][task] + dp[day - 1][task]);
+                    }
+                }
+                dp[day][last] = max;
             }
         }
-        return 0;
+        return dp[n - 1][3];
     }
 }
 
@@ -109,6 +116,6 @@ class Scratch {
         int[][] points4 = new int[][] {{10,50,1},{5,100,1}};//110
         int[][] points5 = new int[][] {{2,1,3},{3,4,6},{10,1,6},{8,3,7}};//25
 
-        System.out.println(sol.ninjaTrainingBUM(4, points5));
+        System.out.println(sol.ninjaTrainingTab(2, points4));
     }
 }
