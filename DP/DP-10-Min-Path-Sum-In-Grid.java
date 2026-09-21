@@ -60,6 +60,31 @@ class Solution {
         }
         return prev[n -1];
     }
+
+    //Space optimization
+    int f4(int[][] grid, int m, int n) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+        int[] prev = new int[n];
+        prev[0] = grid[0][0];
+        for(int i = 1;i < n;i++) {
+            prev[i] = prev[i - 1] + grid[0][i];
+        }
+
+        for(int i = 1;i < m;i++) {
+            int cur = Integer.MAX_VALUE;
+            for(int j = 0;j < n;j++) {
+                int up = prev[j];
+                int left = j > 0 ? cur : Integer.MAX_VALUE;
+                up += grid[i][j];
+                if(left != Integer.MAX_VALUE) left += grid[i][j];
+                cur = Math.min(up, left);
+                prev[j] = cur;
+            }
+        }
+        return prev[n -1];
+    }
 }
 
 class Scratch {
