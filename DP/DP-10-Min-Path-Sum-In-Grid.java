@@ -76,9 +76,9 @@ class Solution {
             int cur = Integer.MAX_VALUE;
             for(int j = 0;j < n;j++) {
                 int up = prev[j];
-                int left = j > 0 ? cur : Integer.MAX_VALUE;
+                int left = cur;
                 up += grid[i][j];
-                if(left != Integer.MAX_VALUE) left += grid[i][j];
+                if(j != 0) left += grid[i][j];
                 cur = Math.min(up, left);
                 prev[j] = cur;
             }
