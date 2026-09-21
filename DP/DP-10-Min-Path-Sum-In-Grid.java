@@ -10,13 +10,13 @@ class Solution {
     //Plain recursion
     int f(int i, int j, int[][] grid) {
         if(i == 0 && j == 0) return grid[i][j];
-        else if(i < 0 || j < 0) return Integer.MAX_VALUE;
+        else if(i < 0 || j < 0) return 1_000_000;
 
         int up = f(i - 1, j, grid);
         int left = f(i, j - 1, grid);
 
-        if(up != Integer.MAX_VALUE) up += grid[i][j];
-        if(left != Integer.MAX_VALUE) left += grid[i][j];
+        up += grid[i][j];
+        left += grid[i][j];
 
         return Math.min(up, left);
     }
@@ -24,14 +24,14 @@ class Solution {
     //Recursion + Memoization
     int f1(int i, int j, int[][] grid, int[][] dp) {
         if(i == 0 && j == 0) return grid[i][j];
-        else if(i < 0 || j < 0) return Integer.MAX_VALUE;
+        else if(i < 0 || j < 0) return 1_000_000;
 
         if(dp[i][j] != -1) return dp[i][j];
         int up = f2(i - 1, j, grid, dp);
         int left = f2(i, j - 1, grid, dp);
 
-        if(up != Integer.MAX_VALUE) up += grid[i][j];
-        if(left != Integer.MAX_VALUE) left += grid[i][j];
+        up += grid[i][j];
+        left += grid[i][j];
 
         return dp[i][j] = Math.min(up, left);
     }
@@ -51,9 +51,9 @@ class Solution {
             int[] cur = new int[n];
             for(int j = 0;j < n;j++) {
                 int up = prev[j];
-                int left = j > 0 ? cur[j - 1] : Integer.MAX_VALUE;
+                int left = j > 0 ? cur[j - 1] : 1_000_000;
                 up += grid[i][j];
-                if(left != Integer.MAX_VALUE) left += grid[i][j];
+                if(left != 1_000_000) left += grid[i][j];
                 cur[j] = Math.min(up, left);
             }
             prev = cur;
@@ -73,7 +73,7 @@ class Solution {
         }
 
         for(int i = 1;i < m;i++) {
-            int cur = Integer.MAX_VALUE;
+            int cur = 1_000_000;
             for(int j = 0;j < n;j++) {
                 int up = prev[j];
                 int left = cur;
