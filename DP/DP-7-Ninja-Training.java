@@ -1,4 +1,4 @@
-//https://www.naukri.com/code360/problems/ninja’s-training_3621003
+//https://www.geeksforgeeks.org/problems/geeks-training/1
 class Solution {
     //Top down
     public int ninjaTraining(int n, int[][] points) {
