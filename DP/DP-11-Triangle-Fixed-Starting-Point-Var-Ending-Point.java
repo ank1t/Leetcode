@@ -9,7 +9,7 @@ class Solution {
 
     //Raw recursion
     int f1(int row, int col, List<List<Integer>> triangle, int n) {
-        if(row == n - 1 && col < n) return triangle.get(row).get(col);
+        if(row == n - 1) return triangle.get(row).get(col);
         else if(row >= n || col >= row + 1) return Integer.MAX_VALUE;
 
         int up = triangle.get(row).get(col) + f1(row + 1, col, triangle, n);
@@ -26,7 +26,7 @@ class Solution {
         }
      */
     int f2(int row, int col, List<List<Integer>> triangle, int n, int[][] dp) {
-        if(row == n - 1 && col < n) return triangle.get(row).get(col);
+        if(row == n - 1) return triangle.get(row).get(col);
 
         if(dp[row][col] != 10001) return dp[row][col];
 
