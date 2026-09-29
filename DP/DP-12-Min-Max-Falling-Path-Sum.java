@@ -68,6 +68,34 @@ class Solution {
         }
         return min;
     }
+
+    int f4(int[][] matrix, int n, int m) {
+        int[] dp = new int[m];
+        dp = matrix[0];
+
+        for(int i = 1;i < n;i++) {
+            int[] cur = new int[m];
+            Arrays.fill(cur, 1_000_000);
+
+            for(int j = 0;j < m;j++) {
+                int down = Integer.MAX_VALUE, downLeft = Integer.MAX_VALUE, downRight = Integer.MAX_VALUE;
+
+                down = matrix[i][j] + dp[j];
+                if(j > 0) downLeft = matrix[i][j] + dp[j - 1];
+                if(j < m - 1) downRight = matrix[i][j] + dp[j + 1];
+
+                cur[j] = Math.min(down, Math.min(downLeft, downRight));
+            }
+
+            dp = cur;
+        }
+
+        int min = Integer.MAX_VALUE;
+        for(int i = 0;i < m;i++) {
+            min = Math.min(dp[i], min);
+        }
+        return min;
+    }
 }
 
 class Scratch {
