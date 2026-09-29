@@ -44,6 +44,30 @@ class Solution {
 
         return dp[row][col] = Math.min(down, Math.min(downLeft, downRight));
     }
+
+    int f3(int[][] matrix, int n, int m) {
+        int[][] dp = new int[n][m];
+        for(int[] row : dp) Arrays.fill(row, 1_000_000);
+        dp[0] = matrix[0];
+
+        for(int i = 1;i < n;i++) {
+            for(int j = 0;j < m;j++) {
+                int down = Integer.MAX_VALUE, downLeft = Integer.MAX_VALUE, downRight = Integer.MAX_VALUE;
+
+                down = matrix[i][j] + dp[i - 1][j];
+                if(j > 0) downLeft = matrix[i][j] + dp[i - 1][j - 1];
+                if(j < m - 1) downRight = matrix[i][j] + dp[i - 1][j + 1];
+
+                dp[i][j] = Math.min(dp[i][j], Math.min(down, Math.min(downLeft, downRight)));
+            }
+        }
+
+        int min = Integer.MAX_VALUE;
+        for(int i = 0;i < m;i++) {
+            min = Math.min(dp[n - 1][i], min);
+        }
+        return min;
+    }
 }
 
 class Scratch {
