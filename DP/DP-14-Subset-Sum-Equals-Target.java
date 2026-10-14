@@ -62,6 +62,29 @@ class Solution {
         }
         return dp[n - 1][k];
     }
+
+    boolean spaceOptimization(int[] arr, int k) {
+        boolean[] prev = new boolean[k + 1];
+
+        prev[0] = true;
+        prev[arr[0]] = true;
+
+        for (int index = 1; index < n; index++) {
+            boolean[] cur = new boolean[k + 1];
+            cur[0] = true;
+            for (int target = 1; target <= k; target++) {
+                boolean pick = false;
+                if (arr[index] <= target) {
+                    pick = prev[target - arr[index]];
+                }
+                boolean notPick = prev[target];
+                boolean result = pick || notPick;
+                cur[target] = result;
+            }
+            prev = cur;
+        }
+        return prev[k];
+    }
 }
 
 class Scratch {
