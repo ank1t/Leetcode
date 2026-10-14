@@ -21,8 +21,7 @@ class Solution {
         else if(index == arr.length -1) return arr[index] == target;
 
         if(dp[index][target] != -1) {
-            if(dp[index][target] == 1) return true;
-            return false;
+            return dp[index][target] == 1;
         }
 
         boolean pick = false;
