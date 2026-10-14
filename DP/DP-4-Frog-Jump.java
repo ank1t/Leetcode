@@ -1,5 +1,8 @@
 import java.util.*;
 
+/*
+    Follow up question for k steps
+ */
 class Solution {
     int minCostBU(int[] height, int k) {
         int n = height.length;
