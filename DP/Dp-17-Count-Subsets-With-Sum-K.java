@@ -53,6 +53,28 @@ class Solution {
         }
         return dp[n - 1][k];
     }
+
+    int spaceOptimization(int[] arr, int k) {
+        int n = arr.length;
+        int[] prev = new int[k + 1];
+        prev[0] = 1;
+        if (arr[0] <= k)
+            prev[arr[0]] = prev[arr[0]] != 0 ? prev[arr[0]] + 1 : 1;
+
+        for (int index = 1; index < n; index++) {
+            int[] cur = new int[k + 1];
+            for (int target = 0; target <= k; target++) {
+                int pick = 0;
+                if (arr[index] <= target)
+                    pick = prev[target - arr[index]];
+                int notPick = prev[target];
+                cur[target] = pick + notPick;
+            }
+            prev = cur;
+        }
+
+        return prev[k];
+    }
 }
 
 class Scratch {
