@@ -72,7 +72,6 @@ class Solution {
             }
             prev = cur;
         }
-
         return prev[k];
     }
 }
