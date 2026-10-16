@@ -1,3 +1,7 @@
+
+/*
+    https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1
+ */
 class Solution {
     public int countPartitions(int[] arr, int diff) {
         int total = 0;
@@ -26,9 +30,16 @@ class Solution {
 		int total = 0;
 		for (int num: arr)
 			total += num;
+
+        Since numbers are given to be non-negative, we can just have the second condition
 		if (total - diff < 0 || (total - diff) % 2 == 1)
 			return 0;
 		int target = (total - diff)/2;
+
+        OR
+        if (total + diff < diff || (total + diff) % 2 == 1)
+			return 0;
+		int target = (total + diff)/2;
 
 		int[][] dp = new int[n][target + 1];
 		for(int[] row: dp) Arrays.fill(row, -1);

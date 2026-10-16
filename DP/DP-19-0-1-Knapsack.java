@@ -39,6 +39,41 @@ class Solution {
     int tabulation(int[] val, int[] wt, int W) {
         int n = val.length;
         int[][] dp = new int[n][W + 1];
+
+        for(int i = wt[0];i <= W;i++) dp[0][i] = val[0];
+
+        for(int index = 1;index < n;index++) {
+            for(int w = 0;w <= W;w++) {
+                int pick = 0;
+                if(wt[index] <= w) pick = val[index] + dp[index - 1][w - wt[index]];
+                int notPick = dp[index - 1][w];
+
+                dp[index][w] = Math.max(pick, notPick);
+            }
+        }
+
+        return dp[n - 1][W];
+    }
+
+    int spaceOptimization(int[] val, int[] wt, int W) {
+        int n = val.length;
+        int[] prev = new int[W + 1];
+
+        for(int i = wt[0];i <= W;i++) prev[i] = val[0];
+
+        for(int index = 1;index < n;index++) {
+            int[] cur = new int[W + 1];
+            for(int w = 0;w <= W;w++) {
+                int pick = 0;
+                if(wt[index] <= w) pick = val[index] + prev[w - wt[index]];
+                int notPick = prev[w];
+
+                dp[index][w] = Math.max(pick, notPick);
+            }
+            prev = cur;
+        }
+
+        return prev[W];
     }
 }
 
