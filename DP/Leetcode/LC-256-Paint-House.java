@@ -1,5 +1,3 @@
-import java.util.*;
-
 class Solution {
     int minCost(int[][] costs) {
         f(0, 3, costs, costs.length);
