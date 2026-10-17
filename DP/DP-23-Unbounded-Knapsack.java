@@ -9,10 +9,13 @@ class Solution {
         return memoization(val, wt, capacity, wt.length - 1, dp);
     }
 
+    /*
+        TC - exponential
+        SC - O(W)
+     */
     int recursion(int[] val, int[] wt, int capacity, int index) {
         if(index == 0) {
-            if(wt[0] <= capacity) return capacity/wt[0];
-            return 0;
+            return (capacity/wt[0])  * val[0];
         }
 
         int notTake = recursion(val, wt, capacity, index  - 1);
@@ -24,9 +27,7 @@ class Solution {
 
     int memoization(int[] val, int[] wt, int capacity, int index, int[][] dp) {
         if (index == 0) {
-            if (wt[0] <= capacity)
-                return (capacity/wt[0]) * val[0];
-            return 0;
+            return (capacity/wt[0]) * val[0];
         }
 
         if (dp[index][capacity] != -1)
@@ -45,8 +46,7 @@ class Solution {
         int[][] dp = new int[n][C + 1];
 
         for(int i = 0;i <= C;i++) {
-            if (wt[0] <= i)
-                dp[0][i] = (i/wt[0]) * val[0];
+            dp[0][i] = (i/wt[0]) * val[0];
         }
 
         for(int index = 1;index < n;index++) {
@@ -68,8 +68,7 @@ class Solution {
         int[] prev = new int[C + 1];
 
         for(int i = 0;i <= C;i++) {
-            if (wt[0] <= i)
-                prev[i] = (i/wt[0]) * val[0];
+            prev[i] = (i/wt[0]) * val[0];
         }
 
         for(int index = 1;index < n;index++) {
