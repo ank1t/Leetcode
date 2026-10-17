@@ -39,6 +39,29 @@ class Solution {
 
         return dp[index][capacity] = Math.max(notTake, take);
     }
+
+    int tabulation(int[] val, int[] wt, int C) {
+        int n = val.length;
+        int[][] dp = new int[n][C + 1];
+
+        for(int i = 0;i <= C;i++) {
+            if (wt[0] <= i)
+                dp[0][i] = (i/wt[0]) * val[0];
+        }
+
+        for(int index = 1;index < n;index++) {
+            for(int capacity = 0;capacity <= C;capacity++) {
+                int notTake = dp[index - 1][capacity];
+                int take = 0;
+                if (wt[index] <= capacity)
+                    take = val[index] + dp[index][capacity - wt[index]];
+
+                dp[index][capacity] = Math.max(notTake, take);
+            }
+        }
+
+        return dp[n - 1][C];
+    }
 }
 
 class Scratch {
