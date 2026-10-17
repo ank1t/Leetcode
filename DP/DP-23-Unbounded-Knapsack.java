@@ -3,8 +3,10 @@ import java.util.*;
 //https://www.geeksforgeeks.org/problems/knapsack-with-duplicate-items4201/1
 class Solution {
     public int knapSack(int val[], int wt[], int capacity) {
+        int[][] dp = new int[wt.length][capacity + 1];
+        for(int[] row: dp) Arrays.fill(row, -1);
 
-        return recursion(val, wt, capacity, wt.length - 1);
+        return memoization(val, wt, capacity, wt.length - 1, dp);
     }
 
     int recursion(int[] val, int[] wt, int capacity, int index) {
@@ -18,6 +20,24 @@ class Solution {
         if(wt[index] <= capacity) take = val[index] + recursion(val, wt, capacity - wt[index], index);
 
         return Math.max(notTake, take);
+    }
+
+    int memoization(int[] val, int[] wt, int capacity, int index, int[][] dp) {
+        if (index == 0) {
+            if (wt[0] <= capacity)
+                return (capacity/wt[0]) * val[0];
+            return 0;
+        }
+
+        if (dp[index][capacity] != -1)
+            return dp[index][capacity];
+
+        int notTake = memoization(val, wt, capacity, index - 1, dp);
+        int take = 0;
+        if (wt[index] <= capacity)
+            take = val[index] + memoization(val, wt, capacity - wt[index], index, dp);
+
+        return dp[index][capacity] = Math.max(notTake, take);
     }
 }
 
