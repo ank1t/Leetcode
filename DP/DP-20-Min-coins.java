@@ -40,7 +40,10 @@ class Solution {
 
         return dp[index][amount] = Math.min(pick, notPick);
     }
-
+    /*
+        int result = recursion(coins, amount);
+        return result > 1_000_000 ? -1 : result;
+     */
     int tabulation(int[] coins, int A) {
         int n = coins.length;
         int[][] tab = new int[n][A + 1];
@@ -63,6 +66,33 @@ class Solution {
         }
 
         return tab[n - 1][A];
+    }
+
+    int spaceOptimization(int[] coins, int A) {
+        int n = coins.length;
+        int[] prev = new int[A + 1];
+        Arrays.fill(prev, 1_000_000_000);
+        prev[0] = 0;
+
+        for(int amount = 1;amount <= A;amount++ ) {
+            if(amount % coins[0] == 0) prev[amount] = amount/coins[0];
+        }
+        for(int index = 1;index < n;index++) {
+            int[] cur = new int[A + 1];
+            Arrays.fill(cur, 1_000_000_000);
+            cur[0] = 0;
+
+            for(int amount = 1;amount <= A;amount++) {
+                int pick = Integer.MAX_VALUE;
+                if(coins[index] <= amount) pick = 1 + cur[amount - coins[index]];
+                int notPick = prev[amount];
+
+                cur[amount] = Math.min(pick, notPick);
+            }
+            prev = cur;
+        }
+
+        return prev[A];
     }
 }
 
