@@ -62,6 +62,30 @@ class Solution {
 
         return dp[n - 1][C];
     }
+
+    int spaceOptimization(int[] val, int[] wt, int C) {
+        int n = val.length;
+        int[] prev = new int[C + 1];
+
+        for(int i = 0;i <= C;i++) {
+            if (wt[0] <= i)
+                prev[i] = (i/wt[0]) * val[0];
+        }
+
+        for(int index = 1;index < n;index++) {
+            int[] cur = new int[C + 1];
+            for(int capacity = 0;capacity <= C;capacity++) {
+                int notTake = prev[capacity];
+                int take = 0;
+                if (wt[index] <= capacity)
+                    take = val[index] + cur[capacity - wt[index]];
+
+                cur[capacity] = Math.max(notTake, take);
+            }
+        }
+
+        return cur[C];
+    }
 }
 
 class Scratch {
