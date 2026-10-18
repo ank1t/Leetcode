@@ -27,6 +27,18 @@ class Solution {
         return Math.max(recursion(index1 - 1, index2, s1, s2),
                 recursion(index1, index2 - 1, s1, s2));
     }
+
+    int memoization(int index1, int index2, String s1, String s2, int[][] dp) {
+        if(index1 < 0 || index2 < 0) return 0;
+
+        if(dp[index1][index2] != -1) return dp[index1][index2];
+
+        if(s1.charAt(index1) == s2.charAt(index2))
+            return dp[index1][index2] = 1 + memoization(index1 - 1, index2 - 1, s1, s2, dp);
+
+        return dp[index1][index2] = Math.max(memoization(index1 - 1, index2, s1, s2, dp),
+                memoization(index1, index2 - 1, s1, s2, dp));
+    }
 }
 
 class Scratch {
