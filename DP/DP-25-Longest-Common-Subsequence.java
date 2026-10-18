@@ -28,6 +28,14 @@ class Solution {
                 recursion(index1, index2 - 1, s1, s2));
     }
 
+    /*
+        TC -> N * M
+        SC -> N * M  + O(N + M)
+
+        It takes N * M to fill DP 2D array. After that, every call returns in constant time.
+
+        there can be a max of n deletions from s1 and m deletions from s2.
+     */
     int memoization(int index1, int index2, String s1, String s2, int[][] dp) {
         if(index1 < 0 || index2 < 0) return 0;
 
@@ -38,6 +46,28 @@ class Solution {
 
         return dp[index1][index2] = Math.max(memoization(index1 - 1, index2, s1, s2, dp),
                 memoization(index1, index2 - 1, s1, s2, dp));
+    }
+
+    int tabulation(String s1, String s2) {
+        int n = s1.length();
+        int m = s2.length();
+
+        int[][] dp = new int[n][m];
+        for(int i = 0;i < n;i++)  dp[i][0] = 0;
+
+        for(int i = 0;i < m;i++) dp[0][i] = 1;
+
+        for(int index1 = 1;index1 <= n;index1++) {
+            for(int index2 = 1;index2 < m;index2++) {
+                if(s1.charAt(index1) == s2.charAt(index2))
+                    dp[index1][index2] = 1 + dp[index1 - 1][index2];
+
+                else dp[index1][index2] = Math.max(dp[index1 - 1][index2],
+                        dp[index1][index2 - 1]);
+            }
+        }
+
+        return dp[n - 1][m - 1];
     }
 }
 
