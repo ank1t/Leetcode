@@ -69,6 +69,28 @@ class Solution {
 
         return dp[n - 1][m - 1];
     }
+
+    int spaceOptimization(String s1, String s2) {
+        int n = s1.length();
+        int m = s2.length();
+
+        int[] prev = new int[m + 1];
+        for(int i = 0;i <= m;i++) prev[i] = 0;
+
+        for(int index1 = 1;index1 <= n;index1++) {
+            int[] cur = new int[m + 1];
+            for(int index2 = 1;index2 <= m;index2++) {
+                if(s1.charAt(index1 - 1) == s2.charAt(index2 - 1))
+                    cur[index2] = 1 + prev[index2 - 1];
+
+                else cur[index2] = Math.max(prev[index2],
+                        cur[index2 - 1]);
+            }
+            prev = cur;
+        }
+
+        return prev[m];
+    }
 }
 
 class Scratch {
