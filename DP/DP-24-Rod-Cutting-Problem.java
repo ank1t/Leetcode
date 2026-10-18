@@ -28,10 +28,29 @@ class Solution {
         if(dp[index][length] != -1) return dp[index][length];
 
         int pick = 0;
-        if(length >= (index + 1)) pick = price[index] + recursion(index, price, length - (index + 1), dp);
-        int notPick = recursion(index - 1, price, length, dp);
+        if(length >= (index + 1)) pick = price[index] + memoization(index, price, length - (index + 1), dp);
+        int notPick = memoization(index - 1, price, length, dp);
 
         return dp[index][length] = Math.max(pick, notPick);
+    }
+
+    int tabulation(int[] price) {
+        int n = price.length;
+        int[][] dp = new int[n][n + 1];
+        for(int i = 0;i < n;i++) dp[i][0] = 0;
+        for(int length = 0;length <= n;length++) dp[0][length] = length * price[0];
+
+        for(int index = 1; index < n;index++) {
+            for(int length = 0;length <= n;length++) {
+                int pick = 0;
+                if(length >= (index + 1)) pick = price[index] + dp[index][length - (index + 1)];
+                int notPick = dp[index - 1][length];
+
+                dp[index][length] = Math.max(pick, notPick);
+            }
+        }
+
+        return dp[n - 1][n];
     }
 }
 
