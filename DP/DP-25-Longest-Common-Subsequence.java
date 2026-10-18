@@ -67,7 +67,7 @@ class Solution {
             }
         }
 
-        return dp[n - 1][m - 1];
+        return dp[n][m];
     }
 
     int spaceOptimization(String s1, String s2) {
