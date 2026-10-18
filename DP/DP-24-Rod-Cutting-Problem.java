@@ -52,6 +52,27 @@ class Solution {
 
         return dp[n - 1][n];
     }
+
+    int spaceOptimization(int[] price) {
+        int n = price.length;
+        int[] prev = new int[n + 1];
+        for(int length = 0;length <= n;length++) prev[length] = length * price[0];
+
+        for(int index = 1; index < n;index++) {
+            int[] cur = new int[n + 1];
+            for(int length = 0;length <= n;length++) cur[length] = length * price[0];
+            for(int length = 0;length <= n;length++) {
+                int pick = 0;
+                if(length >= (index + 1)) pick = price[index] + cur[length - (index + 1)];
+                int notPick = prev[length];
+
+                cur[length] = Math.max(pick, notPick);
+            }
+            prev = cur;
+        }
+
+        return dp[n - 1][n];
+    }
 }
 
 class Scratch {
