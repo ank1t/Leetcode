@@ -22,7 +22,7 @@ class Solution {
                         dp[i][j] = 1 + dp[i - 1][j - 1];
                     } else dp[i][j] = 1;
                     maxLen = Math.max(maxLen, dp[i][j]);
-                } else dp[i][j] = 0;
+                }
             }
         }
         return maxLen;
