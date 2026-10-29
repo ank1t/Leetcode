@@ -59,7 +59,7 @@ class Solution {
         for(int index1 = 1;index1 <= n;index1++) {
             for(int index2 = 1;index2 <= m;index2++) {
                 if(s1.charAt(index1 - 1) == s2.charAt(index2 - 1))
-                    dp[index1][index2] = 1 + dp[index1 - 1][index2];
+                    dp[index1][index2] = 1 + dp[index1 - 1][index2 - 1];
 
                 else dp[index1][index2] = Math.max(dp[index1 - 1][index2],
                         dp[index1][index2 - 1]);
