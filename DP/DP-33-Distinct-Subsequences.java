@@ -17,6 +17,8 @@ class Solution {
     }
 
     /*
+        Order of base cases matter. If you first check for i<0 and return 0, it will give wrong answer.
+        This is because suppose i becomes less than 0, but j also becomes less than 0, then you found a subsequence, so it should return 1.
         int n = s.length();
         int m = t.length();
         int[][] dp = new int[n][m];
