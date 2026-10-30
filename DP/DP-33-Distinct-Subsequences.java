@@ -41,6 +41,8 @@ class Solution {
         int m = t.length();
         int[][] dp = new int[n + 1][m + 1];
 
+        // Base Case: An empty target string (t of length 0) can always
+        // be formed 1 way by deleting all characters from s.
         for (int i = 0; i <= n; i++) {
             dp[i][0] = 1;
         }
