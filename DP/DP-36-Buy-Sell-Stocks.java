@@ -18,6 +18,23 @@ class Solution {
         }
         return maxProfit;
     }
+
+    /*
+        We only sell a stock after we buy it.
+        So moving from left to right, keep track of the min price of the stock
+        for every element, check if selling increases the profit.
+     */
+
+    public int maxProfit2(int[] prices) {
+        int maxProfit = 0;
+        int minElement = prices[0];
+
+        for(int i = 1;i < prices.length;i++) {
+            minElement = Math.min(minElement, prices[i]);
+            maxProfit = Math.max(prices[i] - minElement, maxProfit);
+        }
+        return maxProfit;
+    }
 }
 
 class Scratch {
