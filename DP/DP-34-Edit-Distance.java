@@ -59,6 +59,31 @@ class Solution {
         }
         return dp[n][m];
     }
+
+    int spaceOptimization(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+        int[] prev = new int[m + 1];
+
+        for(int i = 0;i <= m;i++) prev[i] = i;
+
+        for(int i = 1;i <= n;i++) {
+            int[] cur = new int[m + 1];
+            for(int k = 0;k <= m;k++) cur[k] = i;
+            for(int j = 1;j <= m;j++) {
+                if(s.charAt(i - 1) == t.charAt(j - 1)) cur[j] = prev[j - 1];
+                else {
+                    int replace = 1 + prev[j - 1];
+                    int insert = 1 + cur[j - 1];
+                    int delete = 1 + prev[j];
+
+                    cur[j] = Math.min(Math.min(replace, insert), delete);
+                }
+            }
+            prev = cur;
+        }
+        return prev[m];
+    }
 }
 
 class Scratch {
