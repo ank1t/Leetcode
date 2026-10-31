@@ -69,7 +69,7 @@ class Solution {
 
         for(int i = 1;i <= n;i++) {
             int[] cur = new int[m + 1];
-            for(int k = 0;k <= m;k++) cur[k] = i;
+            cur[0] = i;
             for(int j = 1;j <= m;j++) {
                 if(s.charAt(i - 1) == t.charAt(j - 1)) cur[j] = prev[j - 1];
                 else {
