@@ -83,6 +83,25 @@ class Solution {
         }
         return prev[m];
     }
+
+    int spaceOptimization1DArray(String s, String t) {
+        int n = s.length();
+        int m = t.length();
+        int[] prev = new int[m + 1];
+
+        for(int i = 1;i <= n;i++) {
+            prev[0] = 1;
+            for(int j = m;j >= 1;j--) {
+                int pick = 0;
+                if(s.charAt(i - 1) == t.charAt(j - 1)) {
+                    pick = prev[j - 1];
+                }
+                int notPick = prev[j];
+                prev[j] = pick + notPick;
+            }
+        }
+        return prev[m];
+    }
 }
 
 class Scratch {
