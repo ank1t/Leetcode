@@ -35,6 +35,17 @@ class Solution {
         }
         return maxProfit;
     }
+
+    public int maxProfit3(int[] prices) {
+        int maxProfit = 0;
+        int minElement = prices[0];
+
+        for(int i = 1;i < prices.length;i++) {
+            maxProfit = Math.max(prices[i] - minElement, maxProfit);
+            minElement = Math.min(minElement, prices[i]);
+        }
+        return maxProfit;
+    }
 }
 
 class Scratch {
