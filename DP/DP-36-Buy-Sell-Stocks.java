@@ -2,6 +2,7 @@ import java.util.*;
 
 class Solution {
     //O(n)
+    //Space optimization usually expected in DP on stocks
     public int maxProfit(int[] prices) {
         int maxProfit = 0;
         int[] maxArray = new int[prices.length];
