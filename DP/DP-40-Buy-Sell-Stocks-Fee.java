@@ -72,6 +72,20 @@ class Solution {
 
         return next[1];
     }
+
+    int spaceOptimizationExtreme(int[] prices, int fee) {
+        int n = prices.length;
+        int[] next = new int[2];
+
+        for (int index = n - 1; index >= 0; index--) {
+            int[] cur = new int[2];
+            cur[1] = Math.max(-prices[index] + next[0], next[1]);
+            cur[0] = Math.max(prices[index] - fee + next[1], next[0]);
+            next = cur;
+        }
+
+        return next[1];
+    }
 }
 
 class Scratch {
