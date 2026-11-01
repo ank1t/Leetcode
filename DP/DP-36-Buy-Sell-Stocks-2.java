@@ -22,6 +22,24 @@ class Solution {
             return Math.max(sell, notSell);
         }
     }
+
+    //Optimized recursion
+    int recursion(int[] prices, int index, boolean canBuy) {
+        if(index == prices.length) {
+            return 0;
+        }
+
+        if(canBuy) {
+            int buy = -prices[index] + recursion(prices, index + 1, false);
+            int notBuy = recursion(prices, index + 1, canBuy);
+            return Math.max(buy, notBuy);
+        } else {
+            int sell = prices[index] + recursion(prices, index + 1, true);
+            int notSell = recursion(prices, index + 1, canBuy);
+
+            return Math.max(sell, notSell);
+        }
+    }
 }
 
 class Scratch {
