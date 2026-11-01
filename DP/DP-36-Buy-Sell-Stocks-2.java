@@ -84,6 +84,28 @@ class Solution {
         }
         return dp[0][1];
     }
+
+    int spaceOptimization(int[] prices) {
+        int n = prices.length;
+        int[] prev = new int[2];
+
+        for (int index = n - 1; index >= 0; index--) {
+            int[] cur = new int[2];
+            for (int canBuy = 0; canBuy < 2; canBuy++) {
+                if (canBuy == 1) {
+                    int buy = -prices[index] + prev[0];
+                    int notBuy = prev[canBuy];
+                    cur[canBuy] = Math.max(buy, notBuy);
+                } else {
+                    int sell = prices[index] + prev[1];
+                    int notSell = prev[canBuy];
+                    cur[canBuy] = Math.max(sell, notSell);
+                }
+            }
+            prev = cur;
+        }
+        return prev[1];
+    }
 }
 
 class Scratch {
