@@ -76,6 +76,25 @@ class Solution {
             afterNext = next;
             next = cur;
         }
+        return next[1];
+    }
+
+    int spaceOptimization2(int[] prices) {
+        int n = prices.length;
+        int[] next = new int[2];
+        int[] afterNext = new int[2];
+
+        for (int index = n - 1; index >= 0; index--) {
+            int[] cur = new int[2];
+            int buy = -prices[index] + next[0];
+            int notBuy = next[1];
+            cur[1] = Math.max(buy, notBuy);
+            int sell = prices[index] + afterNext[1];
+            int notSell = next[0];
+            cur[0] = Math.max(sell, notSell);
+            afterNext = next;
+            next = cur;
+        }
 
         return next[1];
     }
