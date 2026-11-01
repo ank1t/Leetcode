@@ -58,6 +58,23 @@ class Solution {
         return dp[0][1][0];
     }
 
+    /*
+           for (int index = n - 1; index >= 0; index--) {
+                for (int canBuy = 0; canBuy < 2; canBuy++) {
+                    for (int txCount = 1; txCount >= 0; txCount--) {
+                    }
+                }
+           }
+
+           for (int index = n - 1; index >= 0; index--) {
+                for (int canBuy = 1; canBuy >= 0; canBuy--) {
+                    for (int txCount = 0; txCount < 2; txCount++) {
+                    }
+                }
+           }
+
+           Works too
+     */
     int spaceOptimization(int[] prices) {
         int n = prices.length;
         int[][] prev = new int[2][3];
