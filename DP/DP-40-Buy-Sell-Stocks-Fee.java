@@ -83,7 +83,6 @@ class Solution {
             cur[0] = Math.max(prices[index] - fee + next[1], next[0]);
             next = cur;
         }
-
         return next[1];
     }
 }
