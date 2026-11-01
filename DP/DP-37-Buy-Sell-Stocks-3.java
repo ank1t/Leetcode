@@ -149,6 +149,28 @@ class Solution {
         }
         return dp[0][0];
     }
+
+    int tabulation(int[] prices) {
+        int n = prices.length;
+        int[] next = new int[5];
+
+        for (int index = n - 1; index >= 0; index--) {
+            int[] cur = new int[5];
+            for (int txCount = 0; txCount < 4; txCount++) {
+                if (txCount % 2 == 0) {
+                    int buy = -prices[index] + next[txCount + 1];
+                    int notBuy = next[txCount];
+                    cur[txCount] = Math.max(buy, notBuy);
+                } else {
+                    int sell = prices[index] + next[txCount + 1];
+                    int notSell = next[txCount];
+                    cur[txCount] = Math.max(sell, notSell);
+                }
+            }
+            next = cur;
+        }
+        return next[0];
+    }
 }
 
 class Scratch {
