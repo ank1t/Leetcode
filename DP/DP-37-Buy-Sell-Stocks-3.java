@@ -98,6 +98,37 @@ class Solution {
         }
         return prev[1][0];
     }
+
+    //N x 4 solutions
+    int recursion(int[] prices, int index, int txCount) {
+        if(index == prices.length || txCount > 3) return 0;
+
+        if(txCount % 2 == 0) {
+            int buy = -prices[index] + recursion(prices, index + 1, txCount + 1);
+            int notBuy = recursion(prices, index + 1, txCount);
+            return Math.max(buy, notBuy);
+        } else {
+            int sell = prices[index] + recursion(prices, index + 1, txCount + 1);
+            int notSell = recursion(prices, index + 1, txCount);
+            return Math.max(sell, notSell);
+        }
+    }
+
+    int memoization(int[] prices, int index, int txCount, int[][] dp) {
+        if(index == prices.length || txCount > 3) return 0;
+
+        if(dp[index][txCount] != -1) return dp[index][txCount];
+
+        if(txCount % 2 == 0) {
+            int buy = -prices[index] + memoization(prices, index + 1, txCount + 1, dp);
+            int notBuy = memoization(prices, index + 1, txCount, dp);
+            return dp[index][txCount] = Math.max(buy, notBuy);
+        } else {
+            int sell = prices[index] + memoization(prices, index + 1, txCount + 1, dp);
+            int notSell = memoization(prices, index + 1, txCount, dp);
+            return dp[index][txCount] = Math.max(sell, notSell);
+        }
+    }
 }
 
 class Scratch {
