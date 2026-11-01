@@ -33,6 +33,27 @@ class Solution {
             return dp[index][canBuy] = Math.max(sell, notSell);
         }
     }
+
+    int tabulation(int[] prices, int fee) {
+        int n = prices.length;
+        int[][] dp = new int[n + 1][2];
+
+        for (int index = n - 1; index >= 0; index--) {
+            for (int canBuy = 0; canBuy <= 1; canBuy++) {
+                if (canBuy == 1) {
+                    int buy = -prices[index] + dp[index + 1][0];
+                    int notBuy = dp[index + 1][1];
+                    dp[index][canBuy] = Math.max(buy, notBuy);
+                } else {
+                    int sell = prices[index] - fee + dp[index + 1][1];
+                    int notSell = dp[index + 1][0];
+                    dp[index][canBuy] = Math.max(sell, notSell);
+                }
+            }
+        }
+
+        return dp[0][1];
+    }
 }
 
 class Scratch {
