@@ -150,7 +150,7 @@ class Solution {
         return dp[0][0];
     }
 
-    int tabulation(int[] prices) {
+    int spaceOptimization(int[] prices) {
         int n = prices.length;
         int[] next = new int[5];
 
