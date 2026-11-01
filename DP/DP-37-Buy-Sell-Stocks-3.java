@@ -129,6 +129,26 @@ class Solution {
             return dp[index][txCount] = Math.max(sell, notSell);
         }
     }
+
+    int tabulation(int[] prices) {
+        int n = prices.length;
+        int[][] dp = new int[n + 1][5];
+
+        for (int index = n - 1; index >= 0; index--) {
+            for (int txCount = 0; txCount < 4; txCount++) {
+                if (txCount % 2 == 0) {
+                    int buy = -prices[index] + dp[index + 1][txCount + 1];
+                    int notBuy = dp[index + 1][txCount];
+                    dp[index][txCount] = Math.max(buy, notBuy);
+                } else {
+                    int sell = prices[index] + dp[index + 1][txCount + 1];
+                    int notSell = dp[index + 1][txCount];
+                    dp[index][txCount] = Math.max(sell, notSell);
+                }
+            }
+        }
+        return dp[0][0];
+    }
 }
 
 class Scratch {
