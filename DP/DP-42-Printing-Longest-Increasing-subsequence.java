@@ -9,13 +9,12 @@ class Solution {
 
         for(int i = 1;i < n;i++) {
             for(int prev = 0;prev < i;prev++) {
-                if(nums[i] > nums[prev] && dp[i] < 1 + dp[prev]) {
-                    dp[i] = 1 + dp[prev];
+                if(nums[i] > nums[prev]) {
+                    dp[i] = Math.max(dp[i],  1 + dp[prev]);
                 }
             }
             maxLen = Math.max(maxLen, dp[i]);
         }
-
         return maxLen;
     }
 }
