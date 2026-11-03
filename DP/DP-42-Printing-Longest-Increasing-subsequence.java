@@ -12,18 +12,17 @@ class Solution {
         int maxLen = 1;
 
         for(int i = 1;i < n;i++) {
-            for(int prev = 0;prev < i;prev++) {
-                if(nums[i] > nums[prev] && dp[i] < 1 + dp[prev]) {
+            for (int prev = 0; prev < i; prev++) {
+                if (nums[i] > nums[prev] && dp[i] < 1 + dp[prev]) {
                     dp[i] = 1 + dp[prev];
                     tracker[i] = prev;
                 }
             }
-            if(dp[i] > maxLen) {
+            if (dp[i] > maxLen) {
                 maxLen = dp[i];
                 lastIndex = i;
             }
         }
-
 
         while(lastIndex != -1) {
             System.out.print(nums[lastIndex]);
