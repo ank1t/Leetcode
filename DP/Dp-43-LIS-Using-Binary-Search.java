@@ -25,8 +25,9 @@ class Solution {
                 len++;
             } else {
                 int insertionIndex = Collections.binarySearch(list, nums[i]);
-                insertionIndex = insertionIndex < 0 ? Math.abs(insertionIndex + 1) : insertionIndex;
-                list.set(insertionIndex, nums[i]);
+                if(insertionIndex < 0) {
+                    list.set(Math.abs(insertionIndex + 1), nums[i]);
+                }
             }
         }
         return len;
