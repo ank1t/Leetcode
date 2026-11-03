@@ -24,6 +24,10 @@ class Solution {
                 list.add(nums[i]);
                 len++;
             } else {
+                /*
+                    If the element exists in the list, then non zero index is returned
+                    Else a -ve index is returned.
+                 */
                 int insertionIndex = Collections.binarySearch(list, nums[i]);
                 if(insertionIndex < 0) {
                     list.set(Math.abs(insertionIndex + 1), nums[i]);
