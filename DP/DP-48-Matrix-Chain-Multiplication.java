@@ -37,7 +37,7 @@ class Solution {
             dp[i][i] = 0;
         }
 
-        for (int i = n - 1; i >= 1; i--) {
+        for (int i = n - 2; i >= 1; i--) {
             for (int j = i + 1; j < n; j++) {
                 int min = Integer.MAX_VALUE;
                 for (int k = i; k < j; k++) {
